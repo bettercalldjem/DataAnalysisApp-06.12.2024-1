@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DataAnalysisApp"
+             xmlns:microcharts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             x:Class="DataAnalysisApp.MainPage">
+
+    <StackLayout Padding="10">
+        <!-- Заголовок -->
+        <Label Text="Анализ пользовательских данных"
+               FontSize="24"
+               HorizontalOptions="Center" />
+
+        <!-- Кнопка для загрузки CSV -->
+        <Button Text="Загрузить CSV файл"
+                Clicked="OnLoadCsvFileClicked" />
+
+        <!-- Таблица для отображения данных -->
+        <CollectionView x:Name="DataTable" 
+                        ItemsSource="{Binding UserData}"
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="{Binding UserName}" Grid.Column="0" />
+                        <Label Text="{Binding ActionDate}" Grid.Column="1" />
+                        <Label Text="{Binding Action}" Grid.Column="2" />
+                        <Label Text="{Binding Category}" Grid.Column="3" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Диаграмма активности пользователей -->
+        <microcharts:ChartView x:Name="UserActivityChart"
+                              HeightRequest="300"
+                              Margin="10"
+                              BackgroundColor="White"/>
+
+        <!-- Диаграмма распределения по категориям -->
+        <microcharts:ChartView x:Name="CategoryDistributionChart"
+                              HeightRequest="300"
+                              Margin="10"
+                              BackgroundColor="White"/>
+    </StackLayout>
+</ContentPage>
